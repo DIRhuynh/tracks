@@ -555,10 +555,10 @@ class StatsController < ApplicationController
     cloud = TagCloud.new(current_user, @cut_off_3months)
     cloud.compute
 
-    @tags_for_cloud        = cloud.tags_for_cloud
+    @tags_for_cloud        = cloud.tags
     @tags_min              = cloud.tags_min
     @tags_divisor          = cloud.tags_divisor
-    @tags_for_cloud_90days = cloud.tags_for_cloud_90days
+    @tags_for_cloud_90days = cloud.tags_for_90days
     @tags_min_90days       = cloud.tags_min_90days
     @tags_divisor_90days   = cloud.tags_divisor_90days
   end
