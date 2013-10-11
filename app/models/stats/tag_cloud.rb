@@ -22,18 +22,19 @@ class TagCloud
   end
 
   def tags
-    unless @tags
-      params = [sql(@cut_off), user.id]
-      if @cut_off
-        params += [@cut_off, @cutoff]
-      end
-      @tags = Tag.find_by_sql(params).sort_by { |tag| tag.name.downcase }
-    end
-
-    @tags
+    @tags ||= compute_tags
   end
 
   private
+
+  def compute_tags
+    params = [sql(@cut_off), user.id]
+    if @cut_off
+      params += [@cut_off, @cutoff]
+    end
+
+    Tag.find_by_sql(params).sort_by { |tag| tag.name.downcase }
+  end
 
   # TODO: parameterize limit
   def levels
