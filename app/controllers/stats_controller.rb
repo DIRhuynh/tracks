@@ -16,6 +16,7 @@ class StatsController < ApplicationController
     get_stats_actions
     get_stats_contexts
     get_stats_projects
+    TagCloud.new(current_user).compute
     get_stats_tags
   end
   
