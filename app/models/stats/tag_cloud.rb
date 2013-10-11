@@ -9,20 +9,16 @@ class TagCloud
     @cut_off = cut_off
   end
 
-  def min
-    0
-  end
-
   def max
     tag_counts.max
   end
 
-  def divisor
-    @divisor ||= ((max - min) / levels) + 1
-  end
-
   def tag_counts
     @tag_counts ||= tags.map { |t| t.count.to_i }
+  end
+
+  def relative_size(tag)
+      (tag.count.to_i - min) / divisor
   end
 
   def tags
@@ -42,6 +38,14 @@ class TagCloud
   # TODO: parameterize limit
   def levels
     10
+  end
+
+  def min
+    0
+  end
+
+  def divisor
+    @divisor ||= ((max - min) / levels) + 1
   end
 
   def sql(cut_off = nil)
